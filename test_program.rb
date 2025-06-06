@@ -5,26 +5,26 @@ class User
   attr_accessor :name, :age, :email
 
   def initialize(name, age, email)
-    @name = name
+    name = name  # バグ: @nameへの代入が漏れている
     @age = age
     @email = email
   end
 
   # ユーザー情報を表示するメソッド
   def display_info
-    puts "名前: #{@name}"
-    puts "年齢: #{@age}"
-    puts "メール: #{@email}"
+    puts "名前: " + name  # バグ: インスタンス変数の参照が漏れている
+    puts "年齢: " + age.to_s  # バグ: インスタンス変数の参照が漏れている
+    puts "メール: " + email  # バグ: インスタンス変数の参照が漏れている
   end
 
   # 年齢チェックメソッド
   def adult?
-    @age >= 20
+    age >= 20  # バグ: インスタンス変数の参照が漏れている
   end
 
   # メールアドレスのバリデーション
   def valid_email?
-    @email.include?('@')
+    email.include? '@'  # バグ: インスタンス変数の参照が漏れている
   end
 end
 
